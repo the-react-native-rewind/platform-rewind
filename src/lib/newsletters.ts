@@ -6,8 +6,8 @@ export const newsletters = [
     href: "https://theagenticrewind.com",
     logo: {
       src: "/logos/the-agentic-rewind.png",
-      width: 1814,
-      height: 708,
+      width: 3616,
+      height: 1448,
     },
   },
   {

@@ -4,7 +4,7 @@ The publication site for [platformrewind.com](https://platformrewind.com). It si
 
 The page is a small Next.js app: a subscribe form, a short introduction, a card for each newsletter, and a sponsors section. Newsletter cards and the signup checkboxes both read from `src/lib/newsletters.ts`. Add an entry there, then add a matching adapter in `src/lib/subscribe/providers.ts`.
 
-Logos live in `public/logos/`. The React Native Rewind file is that site's own wordmark. The Agentic Rewind file uses the official pixel wordmark paths, filled with the site's lime (`#c1ff00`) and outlined in black on a transparent background, at the original aspect ratio. Replace `public/logos/the-agentic-rewind.png` with the master export if you have a newer one, and update the width and height in `src/lib/newsletters.ts`. Do not stretch or recolor it in CSS.
+Logos live in `public/logos/`. The React Native Rewind file is that site's own wordmark. `public/logos/the-agentic-rewind.png` is the approved master (3616×1448, transparent) and is served unchanged. The card scales it with `next/image` width and height plus a max height, so the aspect ratio stays 3616:1448. Do not redraw, recolor, or edit that file.
 
 ## Setup
 
