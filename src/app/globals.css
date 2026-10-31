@@ -1,778 +1,923 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SFMono-Light.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* SFMono-LightItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* SFMono-Regular.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* SFMono-RegularItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* SFMono-Medium.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* SFMono-MediumItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* SFMono-Semibold.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* SFMono-SemiboldItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-SemiboldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* SFMono-Bold.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* SFMono-BoldItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* SFMono-Heavy.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-Heavy.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* SFMono-HeavyItalic.otf */
+@font-face {
+  font-family: "SF Mono";
+  src: url("/fonts/SFMono-HeavyItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+
 :root {
   --background: #fef4e8;
-  --ink: #1c1917;
-  --ink-soft: #6b645d;
-  --ink-faint: #7a7268;
-  --mark: #e74b3c;
-  --button: #e74b3c;
-  --button-ink: #ffffff;
-  --surface: #fffdfa;
-  --border: #e4d6c3;
-  --border-strong: #dccdb8;
-  --rule: #1c1917;
-  --input: #ffffff;
-  --shadow-sticker: 0 2px 0 rgba(150, 55, 35, 0.5), 0 1px 2px rgba(28, 25, 23, 0.2);
-  --band: #fff7ee;
-  color-scheme: light;
+  --foreground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Warm near-black "wall" — pure black killed the grain and the graffiti
+       reading. Matches `background.dark` / `paper.dark` in the Tailwind config. */
     --background: #14120f;
-    --ink: #f6eee4;
-    --ink-soft: #b3a99d;
-    --ink-faint: #9a9088;
-    --mark: #68e3e8;
-    --button: #e74b3c;
-    --button-ink: #ffffff;
-    --surface: #221f1b;
-    --border: #35302a;
-    --border-strong: #3e382f;
-    --rule: #f6eee4;
-    --input: #221f1b;
-    --shadow-sticker: 0 2px 0 rgba(0, 0, 0, 0.55);
-    --band: #1c1916;
-    color-scheme: dark;
+    --foreground: #f6eee4;
   }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
+  color: var(--foreground);
   background: var(--background);
-  color: var(--ink);
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-}
-
-button,
-input {
-  font: inherit;
-}
-
-a {
-  color: inherit;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.hero {
-  min-height: 100svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 20px 64px;
-}
-
-.hero-stack {
-  width: min(100%, 640px);
-}
-
-.wordmark {
-  margin: 0;
-  width: fit-content;
-  max-width: 100%;
-  font-family: var(--font-permanent-marker), cursive;
-  font-weight: 400;
-  letter-spacing: 0.015em;
-  color: var(--ink);
-}
-
-.wordmark-platform {
-  display: block;
-  font-size: 44px;
-  line-height: 1.16;
-}
-
-.wordmark-rewind {
-  position: relative;
-  display: inline-block;
-  margin-top: 2px;
-  color: var(--mark);
-  font-size: 62px;
-  line-height: 0.95;
-}
-
-.lede {
-  max-width: 28rem;
-  margin: 22px 0 0;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.7;
-  color: var(--ink-soft);
-}
-
-.signup {
-  position: relative;
-  width: min(100%, 384px);
-  margin-top: 28px;
-}
-
-.email-input {
-  width: 100%;
-  border: 3px solid var(--rule);
-  border-radius: 10px;
-  background: var(--input);
-  color: var(--ink);
-  padding: 15px 18px;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  transition: border-color 150ms ease;
-}
-
-.email-input::placeholder {
-  color: var(--ink-faint);
-}
-
-.email-input:focus {
-  outline: none;
-  border-color: var(--mark);
-}
-
-.newsletter-picks {
-  margin: 16px 0 0;
-  padding: 0;
-  border: 0;
-  display: grid;
-  gap: 10px;
-}
-
-.check {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  cursor: pointer;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  line-height: 1.4;
-}
-
-.check input {
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  margin: 0;
-  flex: 0 0 auto;
-  border: 3px solid var(--rule);
-  border-radius: 5px;
-  background-color: var(--input);
-  background-position: center;
-  background-repeat: no-repeat;
-  display: grid;
-  place-content: center;
-}
-
-.check input:checked {
-  background-color: var(--button);
-  border-color: var(--button);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.2 8.3 6.4 11.4 12.8 4.6' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-}
-
-.check input:focus-visible {
-  outline: 2px solid var(--mark);
-  outline-offset: 3px;
-}
-
-.hp-field {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.subscribe-button {
-  width: 100%;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 10px;
-  background: var(--button);
-  color: var(--button-ink);
-  box-shadow: var(--shadow-sticker);
-  padding: 17px 20px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
-}
-
-.subscribe-button span {
-  display: inline-block;
-  font-family: var(--font-permanent-marker), cursive;
-  font-size: 19px;
-  line-height: 25px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.subscribe-button:focus {
-  outline: none;
-}
-
-.subscribe-button:focus-visible {
-  outline: 2px solid var(--mark);
-  outline-offset: 3px;
-}
-
-.subscribe-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.cta-matrix:hover:not(:disabled),
-.cta-matrix:focus-visible {
-  background: #0b0d0b;
-  color: #9bf6c4;
-  box-shadow: 0 0 0 1px #4ade80, 0 0 22px rgba(74, 222, 128, 0.28);
-}
-
-.cta-matrix:hover:not(:disabled) span,
-.cta-matrix:focus-visible span {
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  letter-spacing: 0.08em;
-}
-
-.cta-glitch:hover:not(:disabled),
-.cta-glitch:focus-visible {
-  animation: glitch-cta 0.9s step-end infinite;
-}
-
-.press-sticker:active:not(:disabled) {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 rgba(150, 55, 35, 0.5);
-}
-
-.form-error {
-  margin: 12px 0 0;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--mark);
-}
-
-.section {
-  padding: 72px 20px;
-}
-
-.section-band {
-  background: var(--band);
-  border-block: 1px solid var(--border);
-}
-
-.section-inner {
-  width: min(100%, 1040px);
-  margin: 0 auto;
-}
-
-.section-copy {
-  width: min(100%, 680px);
-}
-
-.section-title {
-  position: relative;
-  width: fit-content;
-  margin: 0;
-  font-family: var(--font-permanent-marker), cursive;
-  font-size: 21px;
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.marker-underline {
-  position: absolute;
-  left: -2px;
-  bottom: -8px;
-  width: calc(100% + 8px);
-  height: 12px;
-  color: var(--mark);
-  pointer-events: none;
-}
-
-.wordmark-rewind .marker-underline {
-  bottom: -6px;
-  height: 14px;
-}
-
-.section-description {
-  max-width: 40rem;
-  margin: 22px 0 0;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  line-height: 1.7;
-  color: var(--ink-soft);
-}
-
-.body-copy {
-  max-width: 38rem;
-  margin-top: 22px;
-  font-size: 17px;
-  line-height: 1.72;
-}
-
-.body-copy p {
-  margin: 0 0 16px;
-}
-
-.body-copy p:last-child {
-  margin-bottom: 0;
-}
-
-.card-grid {
-  list-style: none;
-  margin: 32px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 18px;
-}
-
-.newsletter-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface);
-  padding: 22px 22px 24px;
-}
-
-.newsletter-logo {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 112px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.card-title {
-  margin: 18px 0 0;
-  font-family: var(--font-permanent-marker), cursive;
-  font-size: 19px;
-  font-weight: 400;
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.card-description {
-  margin: 10px 0 0;
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
-  font-size: 17px;
-  line-height: 1.72;
-}
-
-.card-link {
-  margin-top: 16px;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  color: var(--mark);
-}
-
-.card-link:focus-visible {
-  outline: 2px solid var(--mark);
-  outline-offset: 3px;
-}
-
-.tier-list {
-  margin-top: 32px;
-  display: grid;
-  gap: 28px;
-}
-
-.tier-name {
-  margin: 0;
-  font-family: var(--font-permanent-marker), cursive;
-  font-size: 19px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.logo-row {
-  list-style: none;
-  margin: 14px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.logo-slot {
-  width: 148px;
-  height: 80px;
-  display: grid;
-  place-items: center;
-  border: 2px dashed var(--border-strong);
-  border-radius: 12px;
-  background: var(--surface);
-  color: var(--ink-faint);
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.logo-slot-filled {
-  border-style: solid;
-  border-color: var(--border);
-  padding: 10px;
-}
-
-.sponsor-logo {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 56px;
-  object-fit: contain;
-}
-
-.sponsor-cta {
-  max-width: 38rem;
-  margin-top: 36px;
-}
-
-.sponsor-button {
-  width: min(100%, 280px);
-  margin-top: 8px;
-}
-
-.site-footer {
-  border-top: 1px solid var(--border);
-  padding: 28px 20px 40px;
-}
-
-.footer-inner {
-  width: min(100%, 1040px);
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 28px;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-}
-
-.footer-name {
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--font-permanent-marker), cursive;
-  font-size: 16px;
-  letter-spacing: 0.03em;
-}
-
-.footer-links {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-links a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.footer-copy {
-  margin: 0 0 0 auto;
-}
-
-.matrix-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  overflow: hidden;
-  background: #0b0d0b;
-}
-
-.matrix-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.matrix-dismiss {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 2;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: rgba(155, 246, 196, 0.72);
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 14px;
-  padding: 8px 10px;
-  cursor: pointer;
-}
-
-.matrix-dismiss:hover,
-.matrix-dismiss:focus-visible {
-  color: #9bf6c4;
-  outline: 2px solid #4ade80;
-  outline-offset: 2px;
-}
-
-.matrix-stage {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-
-.matrix-terminal {
-  width: min(100%, 810px);
-  max-height: min(90vh, 720px);
-  overflow: auto;
-  border: 1px solid #1f3b29;
-  border-radius: 12px;
-  background: rgba(10, 15, 11, 0.93);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
-  padding: 28px 24px 32px;
-}
-
-.matrix-chrome {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #1f3b29;
-}
-
-.matrix-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-}
-
-.matrix-dot-red {
-  background: #e74b3c;
-}
-
-.matrix-dot-yellow {
-  background: #e8c547;
-}
-
-.matrix-dot-green {
-  background: #4ade80;
-}
-
-.matrix-chrome-label {
-  margin-left: 8px;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 14px;
-  color: rgba(74, 222, 128, 0.7);
-}
-
-.matrix-lines {
-  display: grid;
-  gap: 16px;
-}
-
-.matrix-line {
-  margin: 0;
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #9bf6c4;
-}
-
-.matrix-prompt {
-  color: rgba(74, 222, 128, 0.6);
-}
-
-.matrix-cursor {
-  display: inline-block;
-  width: 9px;
-  margin-left: 2px;
-  background: #9bf6c4;
-  animation: cursor-blink 1s steps(1) infinite;
-}
-
-.matrix-close {
-  margin: 32px auto 0;
-  display: block;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: rgba(155, 246, 196, 0.6);
-  font-family: var(--font-dm-mono), "DM Mono", monospace;
-  font-size: 15px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.matrix-close:hover,
-.matrix-close:focus-visible {
-  color: #9bf6c4;
-  outline: 2px solid #4ade80;
-  outline-offset: 2px;
-}
-
-@keyframes glitch-cta {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand-logo-link img {
+  transition: filter 180ms ease;
+}
+
+.brand-logo-link:hover img,
+.brand-logo-link:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(50%) sepia(32%) saturate(803%)
+    hue-rotate(141deg) brightness(132%) contrast(82%);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /*
+   * Paper grain — a faint speckle over the page background.
+   * Light mode: a dark dot on cream, like the tooth of uncoated stock.
+   * Dark mode: the same dot inverted, so the wall still has texture.
+   * Applied at page level on Home, The Vault, Guides, Issue detail and About.
+   */
+  .bg-paper-grain {
+    background-image: radial-gradient(
+      rgba(120, 95, 70, 0.055) 1px,
+      transparent 1px
+    );
+    background-size: 3px 3px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .bg-paper-grain {
+      background-image: radial-gradient(
+        rgba(255, 240, 220, 0.035) 1px,
+        transparent 1px
+      );
+    }
+  }
+
+  /*
+   * Diagonal-stripe placeholder for images and video that have no asset yet.
+   * A utility rather than an inline gradient so it inverts with the scheme —
+   * inline it would carry the light palette into dark mode.
+   */
+  .bg-ph-stripes {
+    background-image: repeating-linear-gradient(
+      135deg,
+      #f1e6d8 0 8px,
+      #eadfd0 8px 16px
+    );
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .bg-ph-stripes {
+      background-image: repeating-linear-gradient(
+        135deg,
+        #221f1a 0 8px,
+        #2a251f 8px 16px
+      );
+    }
+  }
+}
+
+@keyframes explode {
   0% {
-    translate: 0 0;
-    text-shadow: none;
-  }
-  8% {
-    translate: -1px 0;
-    text-shadow: 2px 0 rgba(60, 200, 231, 0.9), -2px 0 rgba(28, 25, 23, 0.7);
-  }
-  11% {
-    translate: 2px 0;
-    text-shadow: -1px 0 rgba(60, 200, 231, 0.9), 1px 0 rgba(28, 25, 23, 0.7);
-  }
-  14% {
-    translate: 0 0;
-    text-shadow: 1px 0 rgba(60, 200, 231, 0.9), -1px 0 rgba(28, 25, 23, 0.7);
-  }
-  17% {
-    translate: -1px 0;
-    text-shadow: 2px 0 rgba(60, 200, 231, 0.9), -2px 0 rgba(28, 25, 23, 0.7);
-  }
-  20% {
-    translate: 0 0;
-    text-shadow: none;
-  }
-  60% {
-    translate: 1px 0;
-    text-shadow: -2px 0 rgba(60, 200, 231, 0.9), 2px 0 rgba(28, 25, 23, 0.7);
-  }
-  63% {
-    translate: -2px 0;
-    text-shadow: 2px 0 rgba(60, 200, 231, 0.9), -2px 0 rgba(28, 25, 23, 0.7);
-  }
-  66% {
-    translate: 1px 0;
-    text-shadow: -1px 0 rgba(60, 200, 231, 0.9), 1px 0 rgba(28, 25, 23, 0.7);
-  }
-  69%,
-  to {
-    translate: 0 0;
-    text-shadow: none;
-  }
-}
-
-@keyframes cursor-blink {
-  0%,
-  45% {
+    transform: scale(1);
     opacity: 1;
   }
-  50%,
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
   100% {
+    transform: scale(2);
     opacity: 0;
   }
 }
 
-@media (max-height: 740px) {
-  .hero {
-    align-items: flex-start;
-    padding-top: 28px;
+@keyframes particle {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
   }
 }
 
-@media (min-width: 640px) {
-  .wordmark-platform {
-    font-size: 56px;
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff4444;
+  border-radius: 50%;
+  animation: particle 0.8s ease-out forwards;
+}
+
+/* ==================================================================
+ * Hyperspace warp
+ *
+ * The page transition. The outgoing snapshot accelerates toward the viewer
+ * and blurs out; the incoming one arrives from a point and settles. Both
+ * animations run on the root snapshots, so the whole viewport travels as one
+ * piece — the nav included, which is what makes it read as the page itself
+ * moving rather than its contents rearranging.
+ *
+ * The UA default is a cross-fade between the two snapshots. Replacing the
+ * animation is not enough on its own: the pair is blended, so a scaling old
+ * snapshot shows through the new one as a ghost. Turning off the blending
+ * and letting the old one paint over the new is what gives a clean streak.
+ *
+ * Deliberately outside @layer utilities, like the rest of the motion — these
+ * are pseudo-element selectors Tailwind never sees a class for.
+ * ================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-image-pair(root) {
+    isolation: auto;
   }
 
-  .wordmark-rewind {
-    font-size: 78px;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
+    /* The snapshots are the full viewport; nothing should spill past it. */
+    overflow: clip;
   }
 
-  .hero {
-    padding-inline: 32px;
+  ::view-transition-old(root) {
+    /* Accelerating curve: it hangs for a moment, then goes. */
+    animation: warp-out 420ms cubic-bezier(0.7, 0, 0.84, 0) both;
+    z-index: 1;
   }
 
-  .section {
-    padding: 96px 32px;
+  ::view-transition-new(root) {
+    animation: warp-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    z-index: 0;
   }
 
-  .matrix-terminal {
-    padding: 36px;
+  @keyframes warp-out {
+    to {
+      transform: scale(1.35);
+      opacity: 0;
+      filter: blur(8px);
+    }
   }
 
-  .matrix-line {
-    font-size: 18px;
-  }
-
-  .wordmark-rewind .marker-underline {
-    height: 16px;
+  @keyframes warp-in {
+    from {
+      transform: scale(0.88);
+      opacity: 0;
+      filter: blur(5px);
+    }
   }
 }
 
-@media (min-width: 768px) {
-  .card-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 22px;
-  }
-
-  .newsletter-card {
-    padding: 28px;
-  }
-
-  .newsletter-logo {
-    max-height: 128px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .wordmark-platform {
-    font-size: 68px;
-  }
-
-  .wordmark-rewind {
-    font-size: 96px;
-  }
-}
-
+/*
+ * Reduced motion gets a straight swap. The snapshots still exist for a frame
+ * but nothing animates them, so the transition ends immediately — no fade,
+ * no travel.
+ */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Feathered top and bottom
+ *
+ * For artwork that has to be cropped to fill its column. The drawing runs
+ * out instead of stopping dead, so a crop through the middle of a figure
+ * reads as the ink trailing off rather than a guillotine.
+ *
+ * On the container rather than the image, so it covers every layer inside —
+ * the light and dark copies of the artwork and anything the container itself
+ * paints. Fading one child would leave the others with a hard edge, which is
+ * the exact thing this hides.
+ * ------------------------------------------------------------------ */
+.feather-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 4%,
+    #000 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 4%,
+    #000 96%,
+    transparent 100%
+  );
+}
+
+/*
+ * The fade is sized to the crop, not fixed. Below xl the column is tall and
+ * only about 3% of the artwork is cut, so a heavy fade would eat the shoes
+ * and the UFO — ink that was never in danger. From xl the column is short
+ * and wide and nearly half the drawing goes, so the fade has real work to do.
+ */
+@media (min-width: 1280px) {
+  .feather-y {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 9%,
+      #000 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      #000 9%,
+      #000 88%,
+      transparent 100%
+    );
+  }
+}
+
+/*
+ * Mobile hero strip. Two personal posts sit in a short band above the
+ * headline. The solid part of the mask is long enough for the first line
+ * or two of each card; the rest dissolves into the page background, which
+ * already swaps with the theme, so the fade matches cream and the dark
+ * wall without a second colour stop.
+ */
+.hero-tweet-strip {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%);
+}
+
+/* ------------------------------------------------------------------
+ * Carousel edge fade
+ *
+ * Only where the track actually scrolls. Below md it is a stacked column and
+ * a horizontal fade would be fading nothing.
+ *
+ * Each side is only faded while there is something to scroll to on that side,
+ * which the carousel already tracks for its arrows. A fixed fade dimmed the
+ * first card the moment the page loaded, before anyone had scrolled anything
+ * — the point is to soften a card entering or leaving, not to vignette the
+ * row. At rest both stops are 0px, which is a zero-length ramp and so no
+ * fade at all.
+ * ------------------------------------------------------------------ */
+@media (min-width: 768px) {
+  .track-fade {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--fade-left, 0px),
+      #000 calc(100% - var(--fade-right, 0px)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--fade-left, 0px),
+      #000 calc(100% - var(--fade-right, 0px)),
+      transparent 100%
+    );
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Logo tint on hover
+ *
+ * A filter rather than a swapped asset, because the marks are supplied in one
+ * colour and there is no red version of any of them.
+ *
+ * The chain is derived, not guessed: `brightness(0)` flattens whatever the
+ * mark is — black on paper, inverted white on the wall — to a single black,
+ * and the rest colourises it. Sampled through a canvas, it lands on
+ * rgb(228, 74, 57) against the brand's rgb(231, 75, 60).
+ * ------------------------------------------------------------------ */
+.tile-logo {
+  transition: filter 200ms ease;
+}
+
+.tile:hover .tile-logo {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(96%) saturate(3000%)
+    hue-rotate(338deg) brightness(92%) contrast(95%);
+}
+
+/* ------------------------------------------------------------------
+ * Marker swipe
+ *
+ * Deliberately outside @layer utilities, like everything below: Tailwind
+ * only emits rules from that layer whose selector matches a class it saw
+ * in the source, and this one is applied through a variable className.
+ *
+ * The Graffiti.Highlight component draws one absolutely-positioned swipe
+ * behind its whole box. That is right for a headline pinned to a single
+ * line and wrong the moment the text wraps — the stretched swipe lands in
+ * the gap between the lines and the last line comes out bare.
+ *
+ * As an inline background with box-decoration-break: clone, every line
+ * fragment gets its own swipe, so the copy can be any length at any
+ * viewport. The negative margin cancels the padding so the swipe
+ * overshoots the text the way a real highlighter does without pushing the
+ * line box around.
+ *
+ * The stroke keeps its full shape, tapered ends and all. Light mode is the
+ * yellow marker with dark ink on it. Dark mode keeps the white lettering
+ * and swaps the stroke for a deeper shade of the cyan accent (`mark.dark`,
+ * #68E3E8, the same colour as "COOKED."). The accent itself is too light
+ * under white text, so the swipe is #156E78 — same hue, dark enough to read.
+ *
+ * ------------------------------------------------------------------ */
+.marker-swipe {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 48' preserveAspectRatio='none'%3E%3Cpath d='M4 34c38-9 86-13 142-14 54-1 108 1 150 5-40 8-92 12-148 13-53 1-104-1-144-4z' fill='%23FBE85C'/%3E%3Cpath d='M10 20c44-8 96-11 150-11 52 0 104 2 138 6-38 6-88 9-142 9-52 0-104-2-146-4z' fill='%23FBE85C' opacity='.85'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0.14em 0.35em;
+  margin: 0 -0.35em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .marker-swipe {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 48' preserveAspectRatio='none'%3E%3Cpath d='M4 34c38-9 86-13 142-14 54-1 108 1 150 5-40 8-92 12-148 13-53 1-104-1-144-4z' fill='%23156E78'/%3E%3Cpath d='M10 20c44-8 96-11 150-11 52 0 104 2 138 6-38 6-88 9-142 9-52 0-104-2-146-4z' fill='%23156E78' opacity='.85'/%3E%3C/svg%3E");
+  }
+}
+
+/* ==================================================================
+ * Motion
+ *
+ * Deliberately outside @layer utilities. Tailwind only emits rules from
+ * that layer whose selectors match a class it saw in the source, so every
+ * attribute-selector rule below ([data-reveal], [data-draw]) was being
+ * dropped from the build — the hidden states never shipped and nothing
+ * ever animated.
+ * ================================================================== */
+/* ------------------------------------------------------------------
+ * Motion
+ *
+ * The page should look like it is being drawn, not assembled.
+ *
+ * Every hidden state lives inside `prefers-reduced-motion: no-preference`,
+ * so a reader who asks for less motion never gets a hidden element in the
+ * first place — nothing to un-hide, nothing to time out. The <noscript>
+ * rule in the layout covers the other failure: markup is server-rendered
+ * and visible, and JS only ever adds `data-revealed`.
+ *
+ * Transform and opacity only. No height, no top — it stays on the
+ * compositor and causes no layout shift.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    transition:
+      opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
   }
 
-  .cta-glitch:hover:not(:disabled),
-  .cta-glitch:focus-visible,
-  .matrix-cursor {
-    animation: none;
+  /* Fade up — the default for copy and cards. */
+  [data-reveal="up"] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  /*
+   * Transform only, never opacity. This is for the hero H1, which is the
+   * LCP element — animating it from transparent would defer the largest
+   * paint and cost real Core Web Vitals score.
+   */
+  [data-reveal="rise"] {
+    transform: translateY(16px);
+  }
+
+  /* Lands with a little overshoot — stickers, chips, the splash. */
+  [data-reveal="pop"] {
+    opacity: 0;
+    transform: scale(0.9);
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Settles into its own tilt, so it reads as being placed. */
+  [data-reveal="tilt"] {
+    opacity: 0;
+    transform: rotate(0deg) translateY(14px);
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  [data-reveal][data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal="tilt"][data-revealed] {
+    transform: rotate(var(--tilt, 0deg));
+  }
+
+  /*
+   * The signature move: a marker stroke drawing itself left to right.
+   * `pathLength="1"` normalises the dash maths so one rule works at any
+   * width — the underlines stretch to whatever they sit under.
+   */
+  /*
+   * "the headline phrase" glitches out and back in.
+   *
+   * The animation is on the word itself rather than duplicated into ::before
+   * and ::after, which is the usual way to build this. Those pseudo-elements
+   * need `content: attr(data-text)`, which puts a second copy of the words in
+   * the box — some screen readers announce generated content, so the line
+   * would read twice. A flicker plus an RGB split on text-shadow gets the
+   * same look with one copy of the text.
+   *
+   * It holds steady for most of the cycle and glitches in two short bursts,
+   * because a word that never settles is just noise.
+   *
+   * Inside no-preference, so a reader who asks for less motion gets a word
+   * that simply sits there.
+   */
+  @keyframes glitch {
+    /*
+     * 5s cycle, so one percent is 50ms. The burst runs 79-92%, about 600ms,
+     * and the aftershock 96-99%.
+     *
+     * It was 84-88% before — four steps, 200ms — and at that length it reads
+     * as a flash rather than a glitch. What sells it is the number of
+     * distinct states, not the amount of displacement: every step below is a
+     * different offset, opacity and colour split, including a few that snap
+     * back to clean, so the word stutters instead of blinking once.
+     *
+     * `steps(1, end)` on the animation is what keeps them discrete. Tweened,
+     * this would be a wobble.
+     */
+    0%,
+    79%,
+    92%,
+    95%,
+    99%,
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+      text-shadow: none;
+    }
+    80% {
+      opacity: 0.35;
+      transform: translate(-3px, 0px);
+      text-shadow:
+        3px 0 rgba(231, 75, 60, 0.9),
+        -3px 0 rgba(60, 200, 231, 0.85);
+    }
+    81% {
+      opacity: 1;
+      transform: translate(2px, 0px);
+      text-shadow:
+        -2px 0 rgba(231, 75, 60, 0.9),
+        2px 0 rgba(60, 200, 231, 0.85);
+    }
+    82% {
+      opacity: 0.15;
+      transform: translate(-1px, 1px);
+      text-shadow:
+        4px 0 rgba(231, 75, 60, 0.9),
+        -4px 0 rgba(60, 200, 231, 0.85);
+    }
+    83% {
+      opacity: 1;
+      transform: translate(3px, 0px);
+      text-shadow:
+        -1px 0 rgba(231, 75, 60, 0.9),
+        1px 0 rgba(60, 200, 231, 0.85);
+    }
+    84% {
+      opacity: 0.5;
+      transform: translate(-2px, -1px);
+      text-shadow:
+        2px 0 rgba(231, 75, 60, 0.9),
+        -2px 0 rgba(60, 200, 231, 0.85);
+    }
+    85% {
+      opacity: 1;
+      transform: translate(1px, 0px);
+      text-shadow: none;
+    }
+    86% {
+      opacity: 0.2;
+      transform: translate(-3px, 1px);
+      text-shadow:
+        5px 0 rgba(231, 75, 60, 0.9),
+        -5px 0 rgba(60, 200, 231, 0.85);
+    }
+    87% {
+      opacity: 1;
+      transform: translate(2px, 1px);
+      text-shadow:
+        -3px 0 rgba(231, 75, 60, 0.9),
+        3px 0 rgba(60, 200, 231, 0.85);
+    }
+    88% {
+      opacity: 0.6;
+      transform: translate(-1px, 0px);
+      text-shadow:
+        1px 0 rgba(231, 75, 60, 0.9),
+        -1px 0 rgba(60, 200, 231, 0.85);
+    }
+    89% {
+      opacity: 1;
+      transform: translate(0px, -1px);
+      text-shadow:
+        -4px 0 rgba(231, 75, 60, 0.9),
+        4px 0 rgba(60, 200, 231, 0.85);
+    }
+    90% {
+      opacity: 0.25;
+      transform: translate(2px, 0px);
+      text-shadow:
+        2px 0 rgba(231, 75, 60, 0.9),
+        -2px 0 rgba(60, 200, 231, 0.85);
+    }
+    91% {
+      opacity: 1;
+      transform: translate(-1px, 0px);
+      text-shadow: none;
+    }
+    96% {
+      opacity: 0.15;
+      transform: translate(2px, 0px);
+      text-shadow:
+        4px 0 rgba(231, 75, 60, 0.9),
+        -4px 0 rgba(60, 200, 231, 0.85);
+    }
+    97% {
+      opacity: 1;
+      transform: translate(-2px, 0px);
+      text-shadow:
+        -2px 0 rgba(231, 75, 60, 0.9),
+        2px 0 rgba(60, 200, 231, 0.85);
+    }
+    98% {
+      opacity: 0.4;
+      transform: translate(1px, 1px);
+      text-shadow:
+        1px 0 rgba(231, 75, 60, 0.9),
+        -1px 0 rgba(60, 200, 231, 0.85);
+    }
+  }
+
+  .glitch {
+    display: inline-block;
+    animation: glitch 5s steps(1, end) infinite;
+  }
+
+  /*
+   * The subscribe CTA stutters while the pointer is on it.
+   *
+   * Jittered with `translate`, not `transform`. The button already carries an
+   * inline transform from the magnetic pull, and animating that property
+   * would override it — the button would stop following the cursor for
+   * exactly as long as the cursor was on it, which is the one moment it
+   * exists for. `translate` is its own property and composes with
+   * `transform`, so both survive.
+   *
+   * Restrained on purpose, having been the opposite first. Clipping bands out
+   * of the shape and drop-shadowing the whole red rectangle read as a
+   * rendering fault rather than an effect: a solid button losing half of
+   * itself looks broken, because that is what a broken button looks like.
+   * What survives is the part that reads as chromatic aberration — a couple
+   * of pixels of travel and a colour split on the text.
+   *
+   * Cyan and ink rather than the headline's red and cyan, because this sits
+   * on the red button where a red split is invisible.
+   *
+   * Two short stutters per loop with clean frames between them, so it
+   * flickers rather than vibrating continuously.
+   */
+  @keyframes glitch-cta {
+    0% {
+      translate: 0px 0;
+      text-shadow: none;
+    }
+    8% {
+      translate: -1px 0;
+      text-shadow:
+        2px 0 rgba(60, 200, 231, 0.9),
+        -2px 0 rgba(28, 25, 23, 0.7);
+    }
+    11% {
+      translate: 2px 0;
+      text-shadow:
+        -1px 0 rgba(60, 200, 231, 0.9),
+        1px 0 rgba(28, 25, 23, 0.7);
+    }
+    14% {
+      translate: 0px 0;
+      text-shadow:
+        1px 0 rgba(60, 200, 231, 0.9),
+        -1px 0 rgba(28, 25, 23, 0.7);
+    }
+    17% {
+      translate: -1px 0;
+      text-shadow:
+        2px 0 rgba(60, 200, 231, 0.9),
+        -2px 0 rgba(28, 25, 23, 0.7);
+    }
+    20% {
+      translate: 0px 0;
+      text-shadow: none;
+    }
+    60% {
+      translate: 1px 0;
+      text-shadow:
+        -2px 0 rgba(60, 200, 231, 0.9),
+        2px 0 rgba(28, 25, 23, 0.7);
+    }
+    63% {
+      translate: -2px 0;
+      text-shadow:
+        2px 0 rgba(60, 200, 231, 0.9),
+        -2px 0 rgba(28, 25, 23, 0.7);
+    }
+    66% {
+      translate: 1px 0;
+      text-shadow:
+        -1px 0 rgba(60, 200, 231, 0.9),
+        1px 0 rgba(28, 25, 23, 0.7);
+    }
+    69% {
+      translate: 0px 0;
+      text-shadow: none;
+    }
+    100% {
+      translate: 0px 0;
+      text-shadow: none;
+    }
+  }
+
+  .cta-glitch:hover,
+  .cta-glitch:focus-visible {
+    animation: glitch-cta 900ms steps(1, end) infinite;
+  }
+
+  /*
+   * A look at where the button is about to take you: hovering the CTA turns
+   * it into the terminal it hands over to. Orange sticker to green-on-black
+   * mono, the same green as the transmission's own button.
+   *
+   * Written here rather than as hover: utilities because the label is a
+   * `Text`, which brings its own font and size classes. Those are single
+   * classes on the span and this is two, so it wins on specificity —
+   * whereas a utility would have tied with them and been settled by
+   * whichever Tailwind happened to emit last.
+   */
+  .cta-matrix:hover,
+  .cta-matrix:focus-visible {
+    background-color: #0b0d0b;
+    color: #9bf6c4;
+    box-shadow:
+      0 0 0 1px #4ade80,
+      0 0 22px rgba(74, 222, 128, 0.28);
+  }
+
+  /*
+   * The label's box is pinned before the swap touches it. Hover changes the
+   * family and drops the size 19px -> 15px, and letting the line box follow
+   * resized the button under the cursor — which moves the block below it and
+   * can pull the button out from under the pointer mid-click.
+   */
+  .cta-matrix > span {
+    display: inline-block;
+    line-height: 25px;
+  }
+
+  .cta-matrix:hover > span,
+  .cta-matrix:focus-visible > span {
+    font-family: var(--font-dm-mono), "DM Mono", monospace;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /*
+   * The swap is the effect, so it is not something to animate away from
+   * under someone who asked for less motion — only the jitter is.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glitch:hover,
+    .cta-glitch:focus-visible {
+      animation: none;
+    }
+  }
+
+  [data-draw]:not(.nav-draw)[data-revealed] {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /*
+   * The navigation underline draws on hover rather than fading in — the
+   * same gesture as every heading, so hovering a link feels like the page
+   * marking it rather than a state toggling.
+   */
+  /*
+   * Clipped per path rather than on the svg, so the two strokes can run at
+   * different speeds — the second trails the first, the way a second pass of
+   * a pen does. Clipping the svg moved them as one.
+   *
+   * `inset()` on an SVG path resolves against its own bounding box, which is
+   * what makes this exact: measured, 50% clips to precisely half the stroke.
+   */
+  .nav-draw path {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 260ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .nav-draw path:nth-of-type(2) {
+    transition-duration: 430ms;
+  }
+
+  .group:hover .nav-draw path,
+  .nav-draw[data-active] path {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* The logo's ink runs a little further when you reach for it. */
+  .sticker-drips {
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top center;
+  }
+
+  a:hover .sticker-drips,
+  button:hover .sticker-drips {
+    transform: scaleY(1.35);
+  }
+
+  /*
+   * Inline links draw their underline on hover — the same left-to-right
+   * gesture as every heading. A gradient rather than an SVG, because body
+   * links wrap across lines and a stroke cannot.
+   */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    transition: background-size 280ms cubic-bezier(0.65, 0, 0.35, 1);
+    padding-bottom: 1px;
+  }
+
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1.5px;
+  }
+
+  /* The two halves of the chain pull together. */
+  .anchor-link path {
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .anchor-link:hover path:first-of-type {
+    transform: translate(-0.6px, -0.6px);
+  }
+
+  .anchor-link:hover path:last-of-type {
+    transform: translate(0.6px, 0.6px);
+  }
+
+  /* A little ink wobble. */
+  .wobble {
+    transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .wobble:hover {
+    transform: rotate(-6deg) scale(1.08);
+  }
+
+  /* Paper, not a div. */
+  .hover-paper {
+    transition:
+      transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 120ms ease;
+  }
+
+  .hover-paper:hover {
+    transform: translateY(-2px) rotate(-0.4deg);
+  }
+
+  /* A physical press: the hard shadow compresses under the button. */
+  .press-sticker:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 rgba(150, 55, 35, 0.5);
+  }
+}
+
+/*
+ * Reduced motion: nothing moves, anywhere. Not slower — off.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

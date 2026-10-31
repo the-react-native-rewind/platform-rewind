@@ -1,32 +1,23 @@
-import { SiteFooter } from "@/components/site-footer";
-import { NewsletterCards } from "@/components/newsletter-cards";
-import { Sponsors } from "@/components/sponsors";
-import { SubscribeForm } from "@/components/subscribe-form";
-import { WhoWeAre } from "@/components/who-we-are";
-import { MarkerUnderline } from "@/components/marker-underline";
+import React from "react";
+import { NavigationBar } from "@/components/NavigationBar/NavigationBar";
+import { Footer } from "@/components/Footer/Footer";
+import { Page, PageFrame } from "@/components/Page/Page";
+import { Hero } from "@/components/sections/Hero";
+import { Newsletters } from "@/components/sections/Newsletters";
+import { Sponsors } from "@/components/sections/Sponsors";
+import { SubscribeBand } from "@/components/sections/SubscribeBand";
 
 export default function HomePage() {
   return (
-    <>
-      <main>
-        <section className="hero" aria-labelledby="platform-rewind-title">
-          <div className="hero-stack">
-            <h1 id="platform-rewind-title" className="wordmark">
-              <span className="wordmark-platform">Platform</span>
-              <span className="wordmark-rewind">
-                Rewind
-                <MarkerUnderline />
-              </span>
-            </h1>
-            <p className="lede">The publication behind the Rewind newsletters.</p>
-            <SubscribeForm />
-          </div>
-        </section>
-        <WhoWeAre />
-        <NewsletterCards />
+    <PageFrame typeScale="base">
+      <NavigationBar />
+      <Page.Wide className="flex flex-col gap-20 pb-8 pt-2">
+        <Hero />
+        <Newsletters />
         <Sponsors />
-      </main>
-      <SiteFooter />
-    </>
+      </Page.Wide>
+      <SubscribeBand source="homepage-band" />
+      <Footer />
+    </PageFrame>
   );
 }
