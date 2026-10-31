@@ -2,9 +2,9 @@
 
 The publication site for [platformrewind.com](https://platformrewind.com). It sits over Franz Ríos's newsletters. Today those are [The Agentic Rewind](https://theagenticrewind.com) and [The React Native Rewind](https://thereactnativerewind.com).
 
-The page is a small Next.js app: a subscribe form, a short introduction, a card for each newsletter, and a sponsors section. Newsletter cards and the signup checkboxes both read from `src/lib/newsletters.ts`. Add an entry there, then add a matching adapter in `src/lib/subscribe/providers.ts`.
+The landing page is the TRNR homepage treatment: the same type, paper, graffiti underlines, sticker button, and matrix transmission. Newsletter cards and the signup checkboxes both read from `src/lib/newsletters.ts`. Add an entry there, then add a matching adapter in `src/lib/subscribe/providers.ts`.
 
-Logos live in `public/logos/`. The React Native Rewind file is that site's own wordmark. `public/logos/the-agentic-rewind.png` is the approved master (3616×1448, transparent) and is served unchanged. The card scales it with `next/image` width and height plus a max height, so the aspect ratio stays 3616:1448. Do not redraw, recolor, or edit that file.
+Logos live in `public/logos/`. The React Native Rewind file is that site's own wordmark. `public/logos/the-agentic-rewind.png` is the approved master (3616×1448, transparent) and is served unchanged (`unoptimized`). The card puts it in a frame locked to 3616:1448, so the letterforms are not stretched. Do not redraw, recolor, or edit that file.
 
 ## Setup
 
